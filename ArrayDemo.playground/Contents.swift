@@ -8,8 +8,8 @@ extension Array {
     }
     
     private func moveUp(from currentIndex: Int, to expectedIndex: Int) -> Array {
-        guard currentIndex >= 0 && currentIndex <= self.count else { return self }
-        guard expectedIndex >= 0 && expectedIndex <= self.count else { return self }
+        guard 0...self.count ~= currentIndex else { return self }
+        guard 0...self.count ~= expectedIndex else { return self }
         if currentIndex > expectedIndex {
             var sort = self
             swap(&sort[currentIndex], &sort[currentIndex - 1])
@@ -20,8 +20,8 @@ extension Array {
     }
     
     private func moveDown(from currentIndex: Int, to expectedIndex: Int) -> Array {
-        guard currentIndex >= 0 && currentIndex <= self.count else { return self }
-        guard expectedIndex >= 0 && expectedIndex <= self.count else { return self }
+        guard 0...self.count ~= currentIndex else { return self }
+        guard 0...self.count ~= expectedIndex else { return self }
         if currentIndex < expectedIndex {
             var sort = self
             swap(&sort[currentIndex], &sort[currentIndex + 1])
