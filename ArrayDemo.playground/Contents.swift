@@ -1,4 +1,9 @@
-//: Playground - noun: a place where people can play
+//
+//  ArrayDemo.playground
+//
+//  Created by heguican on 2018/2/2.
+//  Copyright © 2018年 heguican. All rights reserved.
+//
 
 import Cocoa
 
@@ -7,25 +12,23 @@ extension Array {
         self = currentIndex > expectedIndex ? moveUp(from: currentIndex, to: expectedIndex) : moveDown(from: currentIndex, to: expectedIndex)
     }
     
-    private func moveUp(from currentIndex: Int, to expectedIndex: Int) -> Array {
+    private mutating func moveUp(from currentIndex: Int, to expectedIndex: Int) -> Array {
         guard 0...self.count ~= currentIndex else { return self }
         guard 0...self.count ~= expectedIndex else { return self }
         if currentIndex > expectedIndex {
-            var sort = self
-            swap(&sort[currentIndex], &sort[currentIndex - 1])
-            return sort.moveUp(from: currentIndex - 1, to: expectedIndex)
+            (self[currentIndex], self[currentIndex - 1]) = (self[currentIndex - 1], self[currentIndex])
+            return self.moveUp(from: currentIndex - 1, to: expectedIndex)
         } else {
             return self
         }
     }
     
-    private func moveDown(from currentIndex: Int, to expectedIndex: Int) -> Array {
+    private mutating func moveDown(from currentIndex: Int, to expectedIndex: Int) -> Array {
         guard 0...self.count ~= currentIndex else { return self }
         guard 0...self.count ~= expectedIndex else { return self }
         if currentIndex < expectedIndex {
-            var sort = self
-            swap(&sort[currentIndex], &sort[currentIndex + 1])
-            return sort.moveDown(from: currentIndex + 1, to: expectedIndex)
+            (self[currentIndex], self[currentIndex + 1]) = (self[currentIndex + 1], self[currentIndex])
+            return self.moveDown(from: currentIndex + 1, to: expectedIndex)
         } else {
             return self
         }
